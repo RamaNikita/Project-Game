@@ -2,7 +2,7 @@ Basic Tetris HTML,CSS and JavaScript Game
 This is a basic implementation of the Tetris game built using HTML, CSS, and JavaScript.
 
 Installation:
-Clone the repository to your local machine: bash Copy code git clone Open the index.html file in your web browser.
+Clone the repository to your local machine: bash Copy code git clone https://ramanikita.github.io/Project-Game/ Open the index.html file in your web browser.
 
 Game Rules:
 
@@ -14,6 +14,8 @@ Game Rules:
 6. Press Play button in game to play again the game at same point.
 7. Press Restart button in game to restart the game at any point.
 
-Score: After every completed line, score will incresed by 10 points;
-Lines: After every completed line, lines will incresed by 1
+Score: After every completed line, score will incresed by 10 points.
+
+Lines: After every completed line, lines will incresed by 1.
+
 Level: Level will get changed after every 200 points of score.
