@@ -4,25 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Game-Project-Tetris</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<script src="game.js"></script>
+
 <body>
-    <div><h1>Tetris</h1></div>
-<div id="container">
-    <canvas id="tetris" width="350" height="600"></canvas>
-    <div class="right">
-        <canvas id="next-tetromino" width="150" height="150"></canvas>
-    <div id="score">
+    <div id="heading"><h1>TETRIS</h1></div>
+    <div id="main-container">
+        <div id="main-canvas">
+            <canvas id="board" width="270" height="540"></canvas>
+            <div id="buttons">
+                <button  onclick="play()" id="play">Play</button>
+                <button onclick="pause()" id="pause">Pause</button>
+                <button onclick="restart()" id="restart">Restart</button>
+            </div>
+        </div>
+        <div id="side-container">
+            <canvas id="next" width="150" height="150"></canvas>
+    <div id="game-score">
         Score : <div id="score">0</div>
     </div>
-</div>
-<div id="buttons"  >
-    <button>Play</button>
-    <button>Pause</button>
-    <button>Restart</button>
-</div>
-</div> 
+    <div id="game-level">
+        Level : <div id="level">0</div>
+    </div>
+    <div id="game-lines">
+        Lines : <div id="lines">0</div>
+    </div>
+        </div>
+    </div>
+    <script src="tetromino.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>
