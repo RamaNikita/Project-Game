@@ -225,7 +225,7 @@ const nextSq= 25;
                 for( c = 0; c < COL; c++){
                     board[0][c] = VACANT;
                 }
-                // increment the score
+                // increment the score, lines and level
                 score += 10;
                 lines+=1;
                 if(score%200===0){
@@ -236,7 +236,7 @@ const nextSq= 25;
         // update the board
         drawBoard();
         
-        // update the score
+        // update the score,lines and level 
         scoreElement.innerHTML = score;
         linesElement.innerHTML = lines;
         levelElement.innerHTML = level;
@@ -271,7 +271,15 @@ const nextSq= 25;
         }
         return false;
     }
-    
+    let isHard1 = false;
+    const isEasy = document.getElementById('Easy');
+    const isHard = document.getElementById('Hard');
+    isHard.addEventListener('click',function(event){
+        isHard1 = true;
+    })
+    isEasy.addEventListener('click',function(event){
+        isHard1 = false;
+    })
     // CONTROL the piece
     
     document.addEventListener("keydown",CONTROL);
@@ -280,7 +288,7 @@ const nextSq= 25;
         if(event.keyCode == 37){
             p.moveLeft();
             dropStart = Date.now();
-        }else if(event.keyCode == 38){
+        }else if(event.keyCode == 38 && isHard1===false){
             p.rotate();
             dropStart = Date.now();
         }else if(event.keyCode == 39){
@@ -306,6 +314,9 @@ const nextSq= 25;
         if( !gameOver){
             requestAnimationFrame(drop);
         }
+        // if(level>2){
+
+        // }
     }
     
     function play(){

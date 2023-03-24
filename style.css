@@ -62,4 +62,22 @@ body{
        font-size: 20px;
     
     }
+    #side-container #game-lines{
+        margin-bottom: 30px;
+    }
+    #EH{
+    
+        display: flex;
+        flex-direction:row;
+        justify-content: space-around;
+        text-align: center;
+        
+    }
+     #Easy,#Hard{
+        /* margin-bottom: 20px; */
+       font-family:Andale Mono, monospace;
+       font-size: 20px;
+       color: rgb(0, 0, 0);
+    }
+    
     
