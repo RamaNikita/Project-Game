@@ -17,9 +17,10 @@ body{
         transform: translate(-50%,-50%);
     }
     #heading{
-        color: rgb(208, 110, 12);
+        color: rgb(162, 154, 147);
         font-size: 30px;
         display: flex;
+        justify-content: center;
         flex-direction: row;
         margin-top: 10px;
         margin-left: auto;
@@ -106,7 +107,12 @@ body{
         margin: 8%;
      }
     @media screen and (max-width:640px) {
-        #main-comain-container{
+        .main{
+            width: 100%;
+            height: 100%;
+        }
+        #main-container{
+            margin: 2rem;
             padding: 10px;
         }
         #side-container {
