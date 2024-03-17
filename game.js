@@ -231,7 +231,7 @@ Piece.prototype.lock = function () {
       // increment the score, lines and level
       score += 10;
       lines += 1;
-      if (score % 20 === 0) {
+      if (score % 100 === 0) {
         level += 1;
       }
     }

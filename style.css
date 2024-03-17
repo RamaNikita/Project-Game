@@ -50,8 +50,8 @@ body{
     }
     #game-score,#game-level,#game-lines{
         font-family:Andale Mono, monospace;
-       font-size: 25px;
-       color: rgb(0, 0, 0);
+        font-size: 25px;
+        color: rgb(0, 0, 0);
     }
     #buttons{
         display:flex;
@@ -94,12 +94,27 @@ body{
        
      }
      #rotateBtn, #moveDownBtn{
+        background-color: rgb(35, 33, 33);
+        color: beige;
         font-size: 1.5rem;
         margin: 8%;
      }
      #moveLeftBtn, #moveRightBtn{
+        background-color: rgb(35, 33, 33);
+        color: beige;
         font-size: 1.5rem;
         margin: 8%;
      }
-    
+    @media screen and (max-width:640px) {
+        #main-comain-container{
+            padding: 10px;
+        }
+        #side-container {
+            margin-top: 10px;
+        }
+        #rotateBtn, #moveDownBtn, #moveLeftBtn, #moveRightBtn {
+            font-size: 1rem; 
+        }
+        
+    }
     
