@@ -1,5 +1,6 @@
 body{
-    background-color:white;
+    /* background-image:'tetris-art-tetris-pattern-texture-pixel-background-pantone-for-web-page-pixel-mosaic-seamless-pattern-repeating-texture-geometric-vector-background-kid-pattern-for-fabric-bed-linen-color-pixels-700-217244906.jpg' ; */
+    background-color:rgb(28, 33, 34);
     display: flex;
     flex-direction: column;
     }
@@ -16,6 +17,7 @@ body{
         transform: translate(-50%,-50%);
     }
     #heading{
+        color: rgb(208, 110, 12);
         font-size: 30px;
         display: flex;
         flex-direction: row;
@@ -26,7 +28,7 @@ body{
     
     }
     canvas{
-        border: 2px solid white;
+        border: 3px solid white;
         /* background-color: black; */
     }
     #score,#level,#lines{
@@ -40,9 +42,9 @@ body{
         display: flex;
         flex-direction: column;
     }
-    #side-container canvas{
+    /* #side-container canvas{
         margin-bottom: 30px;
-    }
+    } */
     #main-canvas canvas{
         margin-bottom: 10px;
     }
@@ -66,18 +68,38 @@ body{
         margin-bottom: 30px;
     }
     #EH{
-    
-        display: flex;
+            display: flex;
         flex-direction:row;
         justify-content: space-around;
         text-align: center;
-        
-    }
+        margin-bottom: 2rem;
+            }
      #Easy,#Hard{
         /* margin-bottom: 20px; */
        font-family:Andale Mono, monospace;
        font-size: 20px;
-       color: rgb(0, 0, 0);
+       color: rgb(10, 10, 10);
     }
+    #side-arrow{
+        background-color:rgb(192, 115, 115);
+        margin-top: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        font-weight: bold;
+
+    }
+    #side{
+        display: flex;
+        justify-content:space-around;
+       
+     }
+     #rotateBtn, #moveDownBtn{
+        font-size: 1.5rem;
+        margin: 8%;
+     }
+     #moveLeftBtn, #moveRightBtn{
+        font-size: 1.5rem;
+        margin: 8%;
+     }
     
     
