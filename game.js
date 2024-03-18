@@ -345,6 +345,9 @@ function restart() {
 // document.getElementById("pause").addEventListener("click", pause);
 // document.getElementById("restart").addEventListener("click", restart);
 drop();
+document.addEventListener("dblclick", function (event) {
+  event.preventDefault();
+});
 
 function rotatePiece() {
   p.rotate();
