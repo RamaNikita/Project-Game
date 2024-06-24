@@ -1,6 +1,3 @@
-// document.getElementById("play").addEventListener("click", playAudio);
-// document.getElementById("pause").addEventListener("click", pauseAudio);
-// document.getElementById("restart").addEventListener("click", restartAudio);
 const cvs = document.getElementById("board");
 const ctx = cvs.getContext("2d");
 const scoreElement = document.getElementById("score");
@@ -9,7 +6,6 @@ const levelElement = document.getElementById("level");
 const ROW = 20;
 const COL = (COLUMN = 10);
 const SQ = (squareSize = 27);
-const newBoard = [ROW][COL];
 const VACANT = "black"; // color of an empty square
 
 // draw a square
@@ -45,34 +41,53 @@ drawBoard();
 const cvs2 = document.getElementById("next");
 const ctx2 = cvs2.getContext("2d");
 
-const nextRow = 6;
-const nextCol = 6;
+// const nextRow = 6;
+// const nextCol = 6;
 const nextSq = 25;
+
 function drawNextSquare(x, y, color) {
-  ctx2.strokestyle = "black";
-  ctx2.strokeRect(x * nextSq, y * nextSq, nextSq, nextSq);
   ctx2.fillStyle = color;
-  ctx2.fillRect(x * nextSq, y * nextSq, nextSq, nextSq);
+  ctx2.fillRect(x, y, nextSq, nextSq);
+
+  ctx2.strokeStyle = "BLACK";
+  ctx2.strokeRect(x, y, nextSq, nextSq);
 }
-//
-let nextBoard = [];
-for (let r = 0; r < nextRow; r++) {
-  nextBoard[r] = [];
-  for (let c = 0; c < nextCol; c++) {
-    nextBoard[r][c] = VACANT;
-  }
-}
-function drawNextBoard() {
-  for (let r = 0; r < nextRow; r++) {
-    for (let c = 0; c < nextCol; c++) {
-      drawNextSquare(c, r, nextBoard[r][c]);
+
+// Draw next piece on the small canvas
+function drawNextTetromino(nextPiece) {
+  // Clear the next board
+  ctx2.clearRect(0, 0, cvs2.width, cvs2.height);
+  // Calculate the starting position to center the next piece
+  let startX = Math.floor(
+    (cvs2.width -
+      nextPiece.tetromino[nextPiece.tetrominoN][0].length * nextSq) /
+      2
+  );
+  let startY = Math.floor(
+    (cvs2.height - nextPiece.tetromino[nextPiece.tetrominoN].length * nextSq) /
+      2
+  );
+
+  // Draw the next piece on the small canvas
+  // Draw the next piece on the small canvas
+  for (let r = 0; r < nextPiece.tetromino[nextPiece.tetrominoN].length; r++) {
+    for (
+      let c = 0;
+      c < nextPiece.tetromino[nextPiece.tetrominoN][r].length;
+      c++
+    ) {
+      if (nextPiece.tetromino[nextPiece.tetrominoN][r][c]) {
+        drawNextSquare(
+          startX + c * nextSq,
+          startY + r * nextSq,
+          nextPiece.color
+        );
+      }
     }
   }
 }
-drawNextBoard();
 
 // the pieces and their colors
-
 const PIECES = [
   [Z, "teal"],
   [S, "darkgreen"],
@@ -84,17 +99,16 @@ const PIECES = [
 ];
 
 // generate random pieces
-
 function randomPiece() {
   let r = (randomN = Math.floor(Math.random() * PIECES.length)); // 0 -> 6
   return new Piece(PIECES[r][0], PIECES[r][1]);
 }
 
 let p = randomPiece();
-let ply = p;
+let ply = randomPiece();
+drawNextTetromino(ply);
 
 // The Object Piece
-
 function Piece(tetromino, color) {
   this.tetromino = tetromino;
   this.color = color;
@@ -108,7 +122,6 @@ function Piece(tetromino, color) {
 }
 
 // fill function
-
 Piece.prototype.fill = function (color) {
   for (r = 0; r < this.activeTetromino.length; r++) {
     for (c = 0; c < this.activeTetromino.length; c++) {
@@ -121,7 +134,6 @@ Piece.prototype.fill = function (color) {
 };
 
 // draw a piece to the board
-
 Piece.prototype.draw = function () {
   this.fill(this.color);
 };
@@ -132,7 +144,6 @@ Piece.prototype.unDraw = function () {
 };
 
 // move Down the piece
-
 Piece.prototype.moveDown = function () {
   if (!this.collision(0, 1, this.activeTetromino)) {
     this.unDraw();
@@ -141,7 +152,9 @@ Piece.prototype.moveDown = function () {
   } else {
     // we lock the piece and generate a new one
     this.lock();
-    p = randomPiece();
+    p = ply;
+    ply = randomPiece();
+    drawNextTetromino(ply);
   }
 };
 
@@ -191,7 +204,11 @@ Piece.prototype.rotate = function () {
 let score = 0;
 let lines = 0;
 let level = 0;
-
+window.onload = function () {
+  var audio = document.getElementById("gameAudio");
+  audio.play();
+  drop(); // Start the game loop after music starts playing
+};
 Piece.prototype.lock = function () {
   for (r = 0; r < this.activeTetromino.length; r++) {
     for (c = 0; c < this.activeTetromino.length; c++) {
@@ -201,9 +218,16 @@ Piece.prototype.lock = function () {
       }
       // pieces to lock on top = game over
       if (this.y + r < 0) {
-        alert("Game Over");
+        // alert("Game Over");
         // stop request animation frame
         gameOver = true;
+        // Stop game music
+        var audio = document.getElementById("gameAudio");
+        audio.pause();
+        // Play game over music
+        var gameOverAudio = document.getElementById("gameOverAudio");
+        gameOverAudio.play();
+        alert("Game Over");
         break;
       }
       // we lock the piece
@@ -231,7 +255,7 @@ Piece.prototype.lock = function () {
       // increment the score, lines and level
       score += 10;
       lines += 1;
-      if (score % 100 === 0) {
+      if (score % 10 === 0) {
         level += 1;
       }
     }
@@ -245,8 +269,7 @@ Piece.prototype.lock = function () {
   levelElement.innerHTML = level;
 };
 
-// collision fucntion
-
+// collision function
 Piece.prototype.collision = function (x, y, piece) {
   for (r = 0; r < piece.length; r++) {
     for (c = 0; c < piece.length; c++) {
@@ -266,7 +289,7 @@ Piece.prototype.collision = function (x, y, piece) {
       if (newY < 0) {
         continue;
       }
-      // check if there is a locked piece alrady in place
+      // check if there is a locked piece already in place
       if (board[newY][newX] != VACANT) {
         return true;
       }
@@ -274,6 +297,7 @@ Piece.prototype.collision = function (x, y, piece) {
   }
   return false;
 };
+
 let isHard1 = false;
 const isEasy = document.getElementById("Easy");
 const isHard = document.getElementById("Hard");
@@ -318,33 +342,36 @@ function drop() {
   if (!gameOver) {
     requestAnimationFrame(drop);
   }
-  // if(level>2){
-
-  // }
 }
-// function playAudio() {}
 
 function play1() {
   var audio = document.getElementById("gameAudio");
   audio.play();
   p = ply;
+  ply = randomPiece();
+  drawNextTetromino(ply);
 }
+
 function pause() {
   var audio = document.getElementById("gameAudio");
   audio.pause();
   ply = p;
   p = null;
 }
+
 function restart() {
   var audio = document.getElementById("gameAudio");
   audio.currentTime = 0; // Reset audio to the beginning
   audio.play();
   window.location.reload();
 }
-// document.getElementById("play").addEventListener("click", play);
+
+// document.getElementById("play").addEventListener("click", play1);
 // document.getElementById("pause").addEventListener("click", pause);
 // document.getElementById("restart").addEventListener("click", restart);
+
 drop();
+
 document.addEventListener("dblclick", function (event) {
   event.preventDefault();
 });

@@ -12,26 +12,26 @@
 <body>
     <div class="main">
         <div id="heading"><h1>TETRIS</h1></div>
-    <div id="main-container">
-        <div id="main-canvas">
-            <canvas id="board" width="270" height="540"></canvas>
-            <div id="buttons">
-                <button  onclick="play()" id="play">Play</button>
-                <button onclick="pause()" id="pause">Pause</button>
-                <button onclick="restart()" id="restart">Restart</button>
+        <div id="main-container">
+            <div id="main-canvas">
+                <canvas id="board" width="270" height="540"></canvas>
+                <div id="buttons">
+                    <button  onclick="play1()" id="play">Play</button>
+                    <button onclick="pause()" id="pause">Pause</button>
+                    <button onclick="restart()" id="restart">Restart</button>
             </div>
         </div>
         <div id="side-container">
             <canvas id="next" width="150" height="150"></canvas>
-    <div id="game-score">
-        Score : <div id="score">0</div>
-    </div>
-    <div id="game-level">
+            <div id="game-score">
+            Score : <div id="score">0</div>
+        </div>
+        <div id="game-level">
         Level : <div id="level">0</div>
-    </div>
-    <div id="game-lines">
-        Lines : <div id="lines">0</div>
-    </div>
+        </div>
+        <div id="game-lines">
+         Lines : <div id="lines">0</div>
+        </div>
     <div id="EH">
         <button  id="Easy">Easy</button>
         <button  id="Hard">Hard</button>
@@ -53,7 +53,9 @@
     
         
     </div>
-    <audio id="gameAudio" src="Hello.mp3"></audio>
+    <audio id="gameAudio" src="game_music.mp3" loop></audio>
+    <audio id="gameOverAudio" src="game_over.mp3"></audio>
+
     <script src="tetromino.js"></script>
     <script src="game.js"></script>
     </div>

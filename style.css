@@ -30,9 +30,13 @@ body{
     
     }
     canvas{
-        border: 3px solid white;
-        /* background-color: black; */
+        border: 3px solid rgb(255, 255, 255);
+        background-color: black;
     }
+    /* #next{
+        background-color: black;
+
+    } */
     #score,#level,#lines{
         display: inline-block 
     }
@@ -108,7 +112,9 @@ body{
         margin: 8%;
      }
      #next{
-        margin-bottom: 5px;
+        margin: 0;
+        padding: 0;
+        /* margin-bottom: 5px; */
      }
     @media screen and (max-width:640px) {
         .main{
